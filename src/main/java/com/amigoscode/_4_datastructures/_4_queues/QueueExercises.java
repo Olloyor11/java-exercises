@@ -16,21 +16,34 @@ public class QueueExercises {
 
         // TODO: 1 - Create a Queue of Strings using LinkedList as the implementation
         //           Queue<String> queue = ...
+        Queue<String> queue = new LinkedList<>();
 
 
         // TODO: 2 - Add 5 elements to the queue using offer(): "Task1", "Task2", "Task3", "Task4", "Task5"
+        queue.offer("Task1");
+        queue.offer("Task2");
+        queue.offer("Task3");
+        queue.offer("Task4");
+        queue.offer("Task5");
 
 
         // TODO: 3 - Peek at the front element without removing it
         //           Print the result (should be "Task1")
+        System.out.println(queue.peek());
 
 
         // TODO: 4 - Poll (remove) an element from the front and print it
         //           Then print the queue to see the remaining elements
+        String remove = queue.poll();
+        System.out.println(remove);
+        System.out.println(queue);
 
 
         // TODO: 5 - Iterate through the queue using a for-each loop and print each element
         //           Note: this does NOT remove elements from the queue
+        for (String each : queue){
+            System.out.println(each);
+        }
 
 
         // --- PriorityQueue ---
@@ -39,6 +52,18 @@ public class QueueExercises {
         // TODO: 6 - Create a PriorityQueue of Integers, add these values: 50, 20, 40, 10, 30
         //           Poll all elements one by one and print them
         //           Observe how they come out in natural (ascending) order, not insertion order
+        int[] numbers = {50, 20, 40, 10, 30};
+        Queue<Integer> integerQueue = new PriorityQueue<>();
+        for (int num : numbers){
+            integerQueue.offer(num);
+        }
+
+        System.out.println(integerQueue);
+
+       while (!integerQueue.isEmpty()){
+           int removed = integerQueue.poll();
+           System.out.println(removed);
+       }
 
 
         // --- Print Queue Simulation ---
@@ -48,6 +73,22 @@ public class QueueExercises {
         //           Add these jobs using offer(): "Report.pdf", "Photo.jpg", "Letter.docx", "Slides.pptx"
         //           Process (poll) each job one by one, printing "Printing: <job>" for each
         //           Continue until the queue is empty
+        Queue<String> jobsQueue = new LinkedList<>();
+        jobsQueue.offer("Report.pdf");
+        jobsQueue.offer("Photo.jpg");
+        jobsQueue.offer("Letter.docx");
+        jobsQueue.offer("Slides.pptx");
+
+       while (!jobsQueue.isEmpty()) {
+           String rem = jobsQueue.poll();
+           System.out.println("Printing:" + "<" + rem + ">");
+
+
+       }
+        System.out.println(jobsQueue);
+
+
+
 
     }
 }
