@@ -1,5 +1,6 @@
 package com.amigoscode._5_generics._6_wildcards;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,10 +18,18 @@ public class UnboundedWildcard {
     // TODO: 1 - Create a static method: void printList(List<?> list)
     //  It should iterate through the list and print each element.
     //  Note: elements come out as Object since the type is unknown.
+    static void printList(List<?> list){
+        for (Object elements : list){
+            System.out.println(elements);
+        }
+    }
 
 
     // TODO: 2 - Create a static method: int getSize(List<?> list)
     //  It should return the size of any list, regardless of its type.
+    static int getSize(List<?> list){
+        return list.size();
+    }
 
 
     public static void main(String[] args) {
@@ -30,15 +39,28 @@ public class UnboundedWildcard {
         //  (b) List<Integer> with values 1, 2, 3
         //  (c) List<Double> with values 1.1, 2.2, 3.3
         //  Call printList() and getSize() with each of them.
+        List<String> hello = Arrays.asList("Hello", "World");
+        List<Integer> nums = Arrays.asList(1,2,3);
+        List<Double> doubleList = Arrays.asList(1.1, 2.2, 3.3);
+        printList(hello);
+        getSize(hello);
+        printList(nums);
+        getSize(nums);
+        printList(doubleList);
+        getSize(doubleList);
 
 
         // TODO: 4 - Demonstrate that you CANNOT add elements to a List<?>.
         //  Uncomment the code below, observe the compile error, then comment
         //  it back out. Add a comment explaining why adding is not allowed.
         //
-        // List<?> unknownList = Arrays.asList("a", "b", "c");
-        // unknownList.add("d");       // Why does this not compile?
-        // unknownList.add(1);         // Why does this not compile either?
+         List<?> unknownList = Arrays.asList("a", "b", "c");
+//         unknownList.add("d");       // Why does this not compile?
+//         unknownList.add(1);         // Why does this not compile either?
+        /*
+        as it is unknown data type ? , the compiler can not verify the type which the List can accept and that's why there is an error
+         */
+
 
 
         // TODO: 5 - Demonstrate what you CAN do with List<?>:
@@ -47,6 +69,16 @@ public class UnboundedWildcard {
         //  (c) Read elements as Object
         //  (d) Remove elements (by index or using clear())
         //  Write code showing at least two of these operations on a List<?>.
+        System.out.println(getSize(unknownList));
+        System.out.println(unknownList.isEmpty());
+        for (Object obj : unknownList){
+            System.out.println(obj);
+        }
+//        unknownList.clear();
+        System.out.println(unknownList);
 
     }
+    /*
+    after checking these methods I understand that I can not use remove or clear methods
+     */
 }
