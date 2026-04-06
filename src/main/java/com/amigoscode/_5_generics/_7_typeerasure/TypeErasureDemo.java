@@ -63,8 +63,8 @@ public class TypeErasureDemo {
           }
         //  Add a comment explaining why you cannot use instanceof with generics.
         /*
-        As i have seen that both are working correctly and compiling and
-        What i have learnt from it is if we write Generics or not it will drop it while runtime
+        As I have seen that both are working correctly and compiling and
+        What I have learnt from it is if we write Generics or not it will drop it while runtime
          */
 
 

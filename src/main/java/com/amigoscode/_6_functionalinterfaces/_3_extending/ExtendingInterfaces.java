@@ -23,6 +23,9 @@ public class ExtendingInterfaces {
     //  Hint:
     //    @FunctionalInterface
     //    interface Transformer<T> extends Function<T, T> { }
+    @FunctionalInterface
+    interface Transformer<T> extends Function<T, T> {
+
 
 
     // TODO: 2 - Inside the Transformer interface, add a default method:
@@ -30,22 +33,34 @@ public class ExtendingInterfaces {
     //  This method should return a new Transformer that first applies 'this',
     //  then applies 'after' to the result.
     //  Hint: return input -> after.apply(this.apply(input));
+        default Transformer<T> andThenTransform(Transformer<T> after){
+            return input -> after.apply(this.apply(input));
+        }
+
+
+
+    }
 
 
     public static void main(String[] args) {
 
         // TODO: 3 - Create a Transformer<String> called 'trimmer' that trims
         //  whitespace from a string using String::trim or s -> s.trim().
+        Transformer<String> trimmer = String::trim;
 
 
         // TODO: 4 - Create a Transformer<String> called 'lowerCaser' that
         //  converts a string to lowercase.
+        Transformer<String> lowerCaser = lowerer -> lowerer.toLowerCase();
+
 
 
         // TODO: 5 - Chain 'trimmer' and 'lowerCaser' using andThenTransform()
         //  to create a Transformer<String> called 'cleanUp'. Apply it to
         //  "  HELLO WORLD  " and print the result.
         //  Expected: "hello world"
+        Transformer<String> cleanUp = trimmer.andThenTransform(lowerCaser);
+        System.out.println(cleanUp.apply(" HELLO WORLD "));
 
 
         List<String> messyStrings = Arrays.asList(
@@ -56,6 +71,8 @@ public class ExtendingInterfaces {
         //  messyStrings and collect the results into a new List<String>.
         //  Print the cleaned-up list.
         //  Hint: messyStrings.stream().map(cleanUp).collect(...)
+        List<String> cleanedUpList = messyStrings.stream().map(cleanUp).collect(Collectors.toList());
+        System.out.println(cleanedUpList);
 
     }
 }

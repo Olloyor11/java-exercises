@@ -1,6 +1,9 @@
 package com.amigoscode._6_functionalinterfaces._1_gettingstarted;
 
+import com.sun.tools.javac.Main;
+
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -23,15 +26,25 @@ public class LambdaExpressions {
         //  by their length (shorter strings first). Use it to sort the names list.
         //  Hint: Use names.sort(...) or Collections.sort(names, ...)
 
+        Comparator<String> comparator = (a,b) -> Integer.compare(a.length(), b.length());
+        names.sort(comparator);
+
 
         System.out.println("Sorted by length: " + names);
 
         // TODO: 2 - Create a Runnable as a lambda that prints
         //  "Running in a lambda!" to the console. Then execute it by calling run().
+        Runnable todo = () -> System.out.println("Running in a lambda");
+        todo.run();
 
 
         // TODO: 3 - Create a Callable<String> as a lambda that returns
         //  "Result from Callable". Then call it using call() and print the result.
+
+        Callable<String> callableLambda = () -> "Result from Callable";
+        String output = callableLambda.call();
+        System.out.println(output);
+
 
 
         // TODO: 4 - The following multi-line lambda calculates the sum of two
@@ -41,12 +54,16 @@ public class LambdaExpressions {
             int result = a + b;
             return result;
         };
+        BiFunction<Integer,Integer,Integer> sumShort = (a,b) -> a + b;
         System.out.println("Verbose sum: " + sumVerbose.apply(3, 4));
+        System.out.println("Short verbose sum: " + sumShort.apply(3, 4));
 
 
         // TODO: 5 - Create a BiFunction<String, String, String> lambda that
         //  concatenates two strings with " + " in between.
         //  Example: ("Hello", "World") -> "Hello + World"
+        BiFunction<String,String,String> concatenation = (first, second) -> first + " + " + second;
+        System.out.println(concatenation.apply("Hello", "World"));
 
 
         // TODO: 6 - Store a lambda in a variable called 'exclaim' of type
@@ -54,11 +71,17 @@ public class LambdaExpressions {
         //  any string. Then reuse it: apply it to "Hello" and "Goodbye",
         //  printing both results.
 
+        java.util.function.Function<String, String> addExclamation = (a) -> a + "! ";
+
+        System.out.println(addExclamation.apply("Hello"));
+        System.out.println(addExclamation.apply("Goodbye"));
+
 
         // TODO: 7 - Call the processName method below, passing a lambda directly
         //  (not stored in a variable) that converts a name to uppercase.
         //  Print the result.
 
+        System.out.println(processName("Alan", name -> name.toUpperCase()));
     }
 
     /**

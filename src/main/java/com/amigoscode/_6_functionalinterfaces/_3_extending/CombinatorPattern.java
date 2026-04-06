@@ -1,6 +1,7 @@
 package com.amigoscode._6_functionalinterfaces._3_extending;
 
 import java.util.function.Function;
+import static com.amigoscode._6_functionalinterfaces._3_extending.CombinatorPattern.ValidationResult.*;
 
 /**
  * Exercise: Combinator Pattern
@@ -19,11 +20,24 @@ public class CombinatorPattern {
 
     // TODO: 1 - Create a ValidationResult enum with values:
     //  SUCCESS, EMAIL_NOT_VALID, NOT_ADULT, NAME_EMPTY
+    enum ValidationResult {
+        SUCCESS,
+        EMAIL_NOT_VALID,
+        NOT_ADULT,
+        NAME_EMPTY
+    }
 
 
     // TODO: 2 - Create a Customer record (or class) with three fields:
     //  String name, String email, int age
     //  Hint for record: record Customer(String name, String email, int age) {}
+    record Customer(
+            String name,
+            String email,
+            int age
+    ) {
+    }
+
 
 
     // TODO: 3 - Create a @FunctionalInterface called CustomerValidator that
@@ -46,6 +60,25 @@ public class CombinatorPattern {
     //          : ValidationResult.EMAIL_NOT_VALID;
     //  }
 
+    @FunctionalInterface
+    interface CustomerValidator extends Function<Customer, ValidationResult> {
+
+        static CustomerValidator isEmailValid() {
+            return customer -> customer.email().contains("@") ? SUCCESS : EMAIL_NOT_VALID;
+
+        }
+
+        static CustomerValidator isAdult() {
+            return customer -> customer.age() >= 10 ? SUCCESS : NOT_ADULT;
+        }
+
+        static CustomerValidator isNameNotEmpty() {
+            return customer ->  customer.name() != null && !customer.name().isBlank() ? SUCCESS : NAME_EMPTY;
+        }
+
+
+
+
 
     // TODO: 4 - Inside CustomerValidator, add a default method:
     //    default CustomerValidator and(CustomerValidator other)
@@ -57,6 +90,15 @@ public class CombinatorPattern {
     //        ValidationResult result = this.apply(customer);
     //        return result != ValidationResult.SUCCESS ? result : other.apply(customer);
     //    };
+    //
+
+        default CustomerValidator and(CustomerValidator other){
+            return customer -> {
+                ValidationResult result = this.apply(customer);
+                return result != SUCCESS ? result : other.apply(customer);
+            };
+        }
+}
 
 
     public static void main(String[] args) {
@@ -65,17 +107,34 @@ public class CombinatorPattern {
         //  CustomerValidator fullValidator = CustomerValidator.isEmailValid()
         //      .and(CustomerValidator.isAdult())
         //      .and(CustomerValidator.isNameNotEmpty());
+        System.out.println("TO DO 5:");
+        CustomerValidator fullValidator = CustomerValidator
+                .isEmailValid()
+                .and(CustomerValidator.isAdult())
+                .and(CustomerValidator.isNameNotEmpty());
 
 
         // TODO: 6 - Create a valid customer ("Alice", "alice@example.com", 25)
         //  and validate using fullValidator. Print the result.
         //  Expected: SUCCESS
+        System.out.println("TO DO 6:");
+        Customer alice = new Customer("Alice", "Alice@example.com", 25);
+        System.out.println(fullValidator.apply(alice));
 
 
         // TODO: 7 - Create and validate these invalid customers, printing each result:
         //  a) ("Bob", "bob-no-email", 30)    -> Expected: EMAIL_NOT_VALID
         //  b) ("", "young@email.com", 16)    -> Expected: NOT_ADULT
         //  c) ("", "valid@email.com", 25)    -> Expected: NAME_EMPTY
+        System.out.println("TO DO 7:");
+        Customer bob = new Customer("Bob", "bob-no-email", 30);
+        Customer young = new Customer("young", "young@email.com", 6);
+        Customer valid = new Customer("", "valid@email.com", 25);
+        System.out.println(fullValidator.apply(bob));
+        System.out.println(fullValidator.apply(young));
+        System.out.println(fullValidator.apply(valid));
+
+
 
     }
 }
