@@ -21,30 +21,53 @@ public class IntStreamBasics {
         // TODO: 1 - Create an IntStream using IntStream.range(1, 11)
         //           This generates numbers 1 to 10 (end exclusive)
         //           Print each number using forEach
+        System.out.println("TO DO 1: ");
+        IntStream intStream = IntStream.range(1,11);
+        intStream.forEach(System.out::println);
+        System.out.println();
 
 
         // TODO: 2 - Create an IntStream using IntStream.rangeClosed(1, 10)
         //           Calculate and print the sum of all numbers (should be 55)
+        System.out.println("TO DO 2: ");
+        System.out.println(IntStream.rangeClosed(1,10).reduce(0,(a,b) -> a + b));
+        System.out.println();
 
 
         // TODO: 3 - Create an IntStream.rangeClosed(1, 5) and convert it to
         //           a Stream<Integer> using boxed()
         //           Collect the result to a List<Integer> and print it
-
+        System.out.println("TO DO 3: ");
+        Stream<Integer> stream =IntStream.rangeClosed(1,5).boxed();
+        stream.forEach(System.out::println);
+        System.out.println();
 
         // TODO: 4 - Create an IntStream using IntStream.of(10, 20, 30, 40, 50)
         //           Print each value
-
+        System.out.println("TO DO 4: ");
+        IntStream nums = IntStream.of(10, 20, 30, 40, 50);
+        nums.forEach(System.out::println);
+        System.out.println();
 
         // TODO: 5 - Create an IntStream of the values 85, 90, 78, 92, 88
         //           Calculate and print the average using .average()
         //           Remember: average() returns OptionalDouble, use getAsDouble() or orElse()
-
+        System.out.println("TO DO 5: ");
+        IntStream averageOfNums = IntStream.of(85, 90, 78, 92, 88);
+        System.out.println(averageOfNums.average().getAsDouble());
+        System.out.println();
 
         // TODO: 6 - Create an IntStream of the values 15, 3, 42, 7, 28
         //           Find and print both the min and max values
         //           Note: You cannot reuse a stream, so create the IntStream twice
         //           or use summaryStatistics()
+        System.out.println("TO DO 6: ");
+        IntStream numbers = IntStream.of(15, 3, 42, 7, 28);
+        IntStream minValue = IntStream.of(15, 3, 42, 7, 28);
+        System.out.println(numbers.reduce((a,b) -> a > b ? a : b).getAsInt());
+        System.out.println(minValue.reduce( (a,b) -> a < b ? a : b).getAsInt());
+
+
 
     }
 }

@@ -5,19 +5,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Exercise: FlatMap
- *
+ * <p>
  * Learn how to use flatMap() to flatten nested structures.
  * flatMap transforms each element into a stream and then merges
  * all those streams into a single flat stream.
  */
 public class FlatMapExercise {
 
-    record Department(String name, List<Employee> employees) {}
+    record Department(String name, List<Employee> employees) {
+    }
 
-    record Employee(String name, double salary) {}
+    record Employee(String name, double salary) {
+    }
 
     public static void main(String[] args) {
         List<List<String>> nestedLists = List.of(
@@ -61,37 +64,72 @@ public class FlatMapExercise {
         // TODO: 1 - Flatten 'nestedLists' (List<List<String>>) into a single stream
         //           of strings using flatMap
         //           Print each language
-
+        System.out.println("TODO: 1 ");
+        List<String> uniStrings = nestedLists.stream().flatMap(List::stream).collect(Collectors.toList());
+        System.out.println(uniStrings);
+        System.out.println();
 
         // TODO: 2 - Flatten 'arrayOfArrays' (String[][]) using flatMap with Arrays::stream
         //           Print each color
-
+        System.out.println("TODO: 2 ");
+        List<String> collect = Arrays.stream(arrayOfArrays).flatMap(Arrays::stream).collect(Collectors.toList());
+        System.out.println(collect);
+        System.out.println();
 
         // TODO: 3 - Use flatMap to get all individual characters from 'words'
         //           Hint: Map each word to a stream of its characters using
         //           word.chars().mapToObj(c -> (char) c)
         //           Print each character
+        System.out.println("TODO: 3 ");
+        List<Character> chars = words
+                .stream()
+                .flatMap(word ->
+                        word.chars().mapToObj(c -> (char) c))
+                .collect(Collectors.toList());
+        System.out.println(chars);
+        System.out.println();
 
 
         // TODO: 4 - Use flatMap with Optional values:
         //           From 'optionals', extract only the present values using
         //           flatMap(opt -> opt.stream())  or  Optional::stream
         //           Print each name
+        System.out.println("TODO: 4 ");
+        List<String> optionalList = optionals.stream().flatMap(Optional::stream).collect(Collectors.toList());
+        System.out.println(optionalList);
+        System.out.println();
 
 
         // TODO: 5 - Flatten nested objects: from 'departments', get all employees
         //           Use flatMap to go from Department -> stream of Employees
         //           Print each employee's name and salary
+        System.out.println("TODO: 5 ");
+        List<Employee> departments1 = departments.stream().flatMap(department -> department.employees.stream()).collect(Collectors.toList());
+        System.out.println(departments1);
+        System.out.println();
 
 
         // TODO: 6 - Use flatMapToInt to flatten 'nestedInts' into a single IntStream
         //           Calculate and print the sum of all numbers
         //           Hint: Arrays.stream(nestedInts).flatMapToInt(Arrays::stream)
+        System.out.println("TODO: 6 ");
+        int sum = Arrays.stream(nestedInts).flatMapToInt(Arrays::stream).sum();
+        System.out.println(sum);
+        System.out.println();
 
 
         // TODO: 7 - Combine flatMap with other operations:
         //           From 'departments', get all employees with salary > 75000
         //           Collect their names to a list and print it
+        System.out.println("TODO: 7 ");
+        departments.stream()
+                .flatMap(
+                        department -> department
+                                .employees()
+                                .stream())
+                .filter(
+                        employee -> employee
+                                .salary() > 75000).forEach(employee -> System.out.println(employee.name()));
 
     }
 }

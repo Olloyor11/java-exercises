@@ -20,31 +20,63 @@ public class TakeWhileDropWhile {
 
         // TODO: 1 - Use takeWhile to take numbers from 'sortedNumbers' while they are < 5
         //           Print the result (should be 1, 2, 3, 4)
+        System.out.println("TODO: 1 ");
+        List<Integer> numLess5 =sortedNumbers.stream().takeWhile(num -> num < 5).collect(Collectors.toList());
+        System.out.println(numLess5);
+        System.out.println();
 
 
         // TODO: 2 - Use dropWhile to skip numbers from 'sortedNumbers' while they are < 5
         //           Print the result (should be 5, 6, 7, 8, 9, 10)
+        System.out.println("TODO: 2 ");
+        List<Integer> dropLess5 = sortedNumbers.stream().dropWhile(num -> num < 5).collect(Collectors.toList());
+        System.out.println(dropLess5);
+        System.out.println();
 
 
         // TODO: 3 - Combine takeWhile with other operations:
         //           From 'sortedNumbers', take numbers while < 7, then filter to keep
         //           only even numbers, and collect to a list
         //           Print the result
-
+        System.out.println("TODO: 3 ");
+        List<Integer> evenNums = sortedNumbers
+                .stream()
+                .takeWhile(num -> num < 7)
+                .filter(num -> num % 2 == 0)
+                .collect(Collectors.toList());
+        System.out.println(evenNums);
+        System.out.println();
 
         // TODO: 4 - Use takeWhile on 'words' to take words while they start with "a"
         //           Print each word taken
-
+        System.out.println("TODO: 4 ");
+        List<String> wordsStartWithA = words
+                .stream()
+                .takeWhile(word -> word.startsWith("a"))
+                .collect(Collectors.toList());
+        System.out.println(wordsStartWithA);
+        System.out.println();
 
         // TODO: 5 - Compare takeWhile vs filter on 'unsortedNumbers':
         //           First, use takeWhile(n -> n < 5) and print the result
         //           Then, use filter(n -> n < 5) and print the result
         //           Notice the different outputs - takeWhile stops at first non-match
-
+        System.out.println("TODO: 5 ");
+        List<Integer> takeWhile = unsortedNumbers.stream().takeWhile(n -> n < 5).collect(Collectors.toList());
+        System.out.println("TakeWhile : " + takeWhile);
+        List<Integer> filter = unsortedNumbers.stream().filter(n -> n < 5).collect(Collectors.toList());
+        System.out.println("Filter: " + filter);
+        System.out.println();
 
         // TODO: 6 - Use dropWhile on 'logLevels' to skip all DEBUG entries,
         //           then collect the remaining entries to a list
         //           Print the result
-
+        System.out.println("TODO: 6 ");
+        List<String> dropDebug = logLevels
+                .stream()
+                .dropWhile(s -> s.contains("DEBUG"))
+                .collect(Collectors.toList());
+        System.out.println(dropDebug);
+        System.out.println();
     }
 }

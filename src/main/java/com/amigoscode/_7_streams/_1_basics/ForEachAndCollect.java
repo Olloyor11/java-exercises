@@ -21,28 +21,46 @@ public class ForEachAndCollect {
 
         // TODO: 1 - Use forEach to print each element of 'languages' on a separate line
         //           Use a lambda expression
+        System.out.println("TO DO 1: ");
+        languages.forEach(string -> System.out.println(string));
+        System.out.println();
 
 
         // TODO: 2 - Use forEach with a method reference to print each element of 'numbers'
         //           Use System.out::println
+        System.out.println("TO DO 2: ");
+        languages.forEach(System.out::println);
+        System.out.println();
 
 
         // TODO: 3 - Filter 'numbers' to keep even numbers, then collect the results to a List
         //           Print the resulting list
+        System.out.println("TO DO 3: ");
+        List<Integer> evenNumber = numbers.stream().filter(num -> num % 2 ==0).collect(Collectors.toList());
+        System.out.println(evenNumber);
+        System.out.println();
 
 
         // TODO: 4 - Collect 'languages' stream results to a Set (removes duplicates automatically)
         //           Print the resulting set
-
+        System.out.println("TO DO 4: ");
+        Set<String> languagesz = languages.stream().collect(Collectors.toSet());
+        System.out.println(languagesz);
+        System.out.println();
 
         // TODO: 5 - Collect 'numbers' stream to an unmodifiable list
         //           Use Collectors.toUnmodifiableList() or .toList()
         //           Print the result
-
+        System.out.println("TO DO 5: ");
+        List<Integer> numberss = numbers.stream().collect(Collectors.toUnmodifiableList());
+        System.out.println(numberss);
+        System.out.println();
 
         // TODO: 6 - Use Collectors.toCollection() to collect 'languages' into a LinkedList
         //           Print the resulting LinkedList and its class name to verify the type
         //           Hint: Collectors.toCollection(LinkedList::new)
+        System.out.println("TO DO 6: ");
+        languages.stream().collect(Collectors.toCollection(LinkedList::new)).forEach(System.out::println);
 
     }
 }

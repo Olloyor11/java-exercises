@@ -21,28 +21,40 @@ public class CreatingStreams {
 
         // TODO: 1 - Create a stream from the 'names' list and print each element
         //           Use the .stream() method on the list
+        System.out.println("TO DO 1: ");
+        names.stream().forEach(name -> System.out.println(name));
 
 
         // TODO: 2 - Create a stream from the 'fruits' array using Arrays.stream()
         //           and print each element
+        System.out.println("TO DO 2: ");
+        Arrays.stream(fruits).forEach(fruit -> System.out.println(fruit));
 
 
         // TODO: 3 - Create a stream using Stream.of() with the values "Red", "Green", "Blue"
         //           and print each element
+        System.out.println("TO DO 3: ");
+        Stream.of("Red", "Green", "Blue").forEach(element -> System.out.println(element));
 
 
         // TODO: 4 - Create an empty stream using Stream.empty()
         //           Print its count to verify it has 0 elements
+        System.out.println("TO DO 4: ");
+        System.out.println(Stream.empty().count());
 
 
         // TODO: 5 - Create a stream of characters from the 'sentence' string
         //           Use sentence.chars() to get an IntStream, then print each character
         //           Hint: Use .mapToObj(c -> (char) c) to convert int to char
+        System.out.println("TO DO 5: ");
+        sentence.chars().mapToObj(c ->(char) c).forEach(s -> System.out.println(s));
 
 
         // TODO: 6 - Create an infinite stream using Stream.generate() that generates
         //           random integers between 0 and 100. Limit it to 10 elements and print them.
         //           Hint: Use Math.random() and limit()
+        System.out.println("TO DO 6: ");
+        Stream.generate(() -> (int)(Math.random() * 10)).limit(10).forEach(num -> System.out.println(num));
 
     }
 }

@@ -37,30 +37,57 @@ public class AverageAndSum {
         // TODO: 1 - Calculate the sum of all student scores
         //           Use mapToInt(Student::score).sum()
         //           Print the result
+        System.out.println("TODO: 1 ");
+        int sumScores = students.stream().mapToInt(Student::score).sum();
+        System.out.println(sumScores);
+        System.out.println();
 
 
         // TODO: 2 - Calculate the average of all student scores
         //           Use mapToDouble(Student::score).average()
         //           Print the result (remember: average() returns OptionalDouble)
+        System.out.println("TODO: 2 ");
+        OptionalDouble averageScores = students.stream().mapToInt(Student::score).average();
+        System.out.println(averageScores);
+        System.out.println();
 
 
         // TODO: 3 - Use Collectors.summingInt() to sum all student scores
         //           Print the result
+        System.out.println("TODO: 3 ");
+        int scores = students.stream().collect(Collectors.summingInt(Student::score));
+        System.out.println(scores);
+        System.out.println();
+
 
 
         // TODO: 4 - Use Collectors.averagingDouble() to average all product prices
         //           Print the result
+        System.out.println("TODO: 4 ");
+        double averagePrice = products.stream().collect(Collectors.averagingDouble(Product::price));
+        System.out.println(averagePrice);
+        System.out.println();
 
 
         // TODO: 5 - Calculate the weighted average of products:
         //           weighted avg = sum(price * quantity) / sum(quantity)
         //           Hint: Use mapToDouble for the numerator and mapToInt for denominator
         //           Print the result
+        System.out.println("TODO: 5 ");
+        double numerator = products.stream().mapToDouble(p -> p.price() * p.quantity()).sum();
+        int denominator = products.stream().mapToInt(q -> q.quantity()).sum();
+        double weightedAvg = numerator / denominator;
+        System.out.println(weightedAvg);
+        System.out.println();
 
 
         // TODO: 6 - Handle an empty stream: calculate the average of 'emptyStudents' scores
         //           Use orElse(0.0) to provide a default value when no elements exist
         //           Print the result
+        System.out.println("TODO: 6 ");
+        double emptyStudent = emptyStudents.stream().mapToInt(Student::score).average().orElse(0.0);
+        System.out.println(emptyStudent);
+        System.out.println();
 
     }
 }

@@ -40,28 +40,49 @@ public class MapExercise {
 
         // TODO: 1 - Map 'people' to extract just their names
         //           Collect to a list and print it
+        System.out.println("TODO: 1 ");
+        List<String> names = people.stream().map(person -> person.name).collect(Collectors.toList());
+        System.out.println(names);
+        System.out.println();
 
 
         // TODO: 2 - Map Person objects to PersonDTO objects (dropping the age field)
         //           Collect to a list and print each DTO
-
+        System.out.println("TODO: 2 ");
+        List<PersonDTO> personList =people
+                .stream()
+                .map(person ->
+                        new PersonDTO(person.name(), person.email()))
+                .collect(Collectors.toList());
+        System.out.println(personList);
+        System.out.println();
 
         // TODO: 3 - Use mapToInt to get the ages of all people
         //           Calculate and print the sum of ages
-
+        System.out.println("TODO: 3 ");
+        int sumOfAges = people.stream().mapToInt(person -> person.age()).sum();
+        System.out.println(sumOfAges);
+        System.out.println();
 
         // TODO: 4 - Use mapToDouble to get all product prices
         //           Calculate and print the sum of prices
-
+        System.out.println("TODO: 4 ");
+        double sumOfProd = products.stream().mapToDouble(Product::price).sum();
+        System.out.println(sumOfProd);
+        System.out.println();
 
         // TODO: 5 - Chain map operations on 'sentences':
         //           First map to lowercase, then map to the first word only (split by space)
         //           Print each result
-
+        System.out.println("TODO: 5 ");
+        sentences.stream().map(String::toLowerCase).map(sentence -> sentence.split(" ")[0]).forEach(strings -> System.out.println(strings));
+        System.out.println();
 
         // TODO: 6 - Use map with a method reference: map 'sentences' to uppercase
         //           using String::toUpperCase
         //           Collect to a list and print it
-
+        System.out.println("TODO: 6 ");
+        List<String> stringList = sentences.stream().map(String::toUpperCase).collect(Collectors.toList());
+        System.out.println(stringList);
     }
 }
