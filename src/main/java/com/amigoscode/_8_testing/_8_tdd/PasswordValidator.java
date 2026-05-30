@@ -18,6 +18,12 @@ package com.amigoscode._8_testing._8_tdd;
  */
 public class PasswordValidator {
 
+    public static final int MIN_LENGTH_OF_PASSWORD = 8;
+    public static final String SPECIAL_CHAR_REGEX = ".*[!@#$%^&*()_+=<>?/\\[\\]{}|].*";
+    public static final String DIGIT_REGEX = ".*\\d.*";
+    public static final String ONE_LOWERCASE_LETTER_REGEX = ".*[a-z].*";
+    public static final String ONE_UPPERCASE_LETTER_REGEX = ".*[A-Z].*";
+
     /**
      * Validates whether the given password meets all strength requirements.
      *
@@ -26,7 +32,33 @@ public class PasswordValidator {
      * @throws IllegalArgumentException if password is null
      */
     public boolean isValid(String password) {
+        if (password == null) {
+            throw new IllegalArgumentException("Password can not be null");
+        }
+        if (password.isBlank()){
+            return false;
+        }
+        String trimmed = password.trim();
+        if (trimmed.length() < MIN_LENGTH_OF_PASSWORD){
+            return false;
+        }
+        if (!trimmed.matches(ONE_UPPERCASE_LETTER_REGEX)) {
+            return false;
+        }
+        if (!trimmed.matches(ONE_LOWERCASE_LETTER_REGEX)) {
+            return false;
+        }
+        if (!trimmed.matches(DIGIT_REGEX)) {
+            return false;
+        }
+        if (!trimmed.matches(SPECIAL_CHAR_REGEX)){
+            return false;
+        }
+
+        return true;
+
+
         // TODO: Students implement this after writing tests first (TDD approach)
-        throw new UnsupportedOperationException("Implement me using TDD!");
+//        throw new UtrimmednsupportedOperationException("Implement me using TDD!");
     }
 }

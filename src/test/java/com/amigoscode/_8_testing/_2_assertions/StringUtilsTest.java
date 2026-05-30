@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -26,18 +27,38 @@ class StringUtilsTest {
     //  Assert that "racecar" is a palindrome (assertTrue).
     //  Assert that "hello" is NOT a palindrome (assertFalse).
     //  Assert that "A man a plan a canal Panama" is a palindrome (assertTrue).
+    @Test
+    void chackIfItIsPalindrome(){
+        assertTrue(stringUtils.isPalindrome("racecar"));
+        assertFalse(stringUtils.isPalindrome("hello"));
+        assertTrue(stringUtils.isPalindrome("A man a plan a canal Panama"));
+
+    }
 
 
     // TODO: 2 - Test reverse using assertEquals.
     //  Assert that reversing "hello" returns "olleh".
     //  Assert that reversing "Java" returns "avaJ".
     //  Assert that reversing "" (empty string) returns "".
+    @Test
+    void testReverseUsingAssertEquals(){
+        assertEquals("olleh", stringUtils.reverse("hello"));
+        assertEquals("avaJ", stringUtils.reverse("Java"));
+        assertEquals("", stringUtils.reverse(""));
+    }
 
 
     // TODO: 3 - Test capitalize using assertEquals.
     //  Assert that capitalizing "hello" returns "Hello".
     //  Assert that capitalizing "java" returns "Java".
     //  Assert that capitalizing "" (empty string) returns "".
+    @Test
+    void testCapitalizeUsingAssertEquals(){
+        assertEquals("Hello", stringUtils.capitalize("hello"));
+        assertEquals("Java", stringUtils.capitalize("java"));
+        assertEquals("", stringUtils.capitalize(""));
+
+    }
 
 
     // TODO: 4 - Test isEmpty with various inputs including a null check.
@@ -45,12 +66,26 @@ class StringUtilsTest {
     //  Assert that isEmpty("") returns true.
     //  Assert that isEmpty("   ") returns true (whitespace only).
     //  Assert that isEmpty("hello") returns false (assertFalse).
+    @Test
+    void testIsEmptyWithVariousInputsIncludingANullCheck(){
+        assertTrue(stringUtils.isEmpty(null));
+        assertTrue(stringUtils.isEmpty(""));
+        assertTrue(stringUtils.isEmpty("  "));
+        assertFalse(stringUtils.isEmpty("hello"));
+    }
 
 
     // TODO: 5 - Test countVowels using assertEquals.
     //  Assert that countVowels("hello") returns 2.
     //  Assert that countVowels("AEIOU") returns 5.
     //  Assert that countVowels("xyz") returns 0.
+    @Test
+    void testCountVowelsUsingAssertEquals(){
+        assertEquals(2,stringUtils.countVowels("hello"));
+        assertEquals(5,stringUtils.countVowels("AEIOU"));
+        assertEquals(0,stringUtils.countVowels("XYZ"));
+
+    }
 
 
     // TODO: 6 - Use assertAll to group multiple related assertions together.
@@ -61,10 +96,26 @@ class StringUtilsTest {
     //      () -> assertEquals("", stringUtils.reverse(""))
     //  );
 
+    @Test
+    void UsingAssertAllToGroupMultipleRelatedAssertionsTogether(){
+        assertAll(() -> assertEquals("olleh", stringUtils.reverse("hello")),
+                  () -> assertEquals("avaJ", stringUtils.reverse("Java")),
+                  () -> assertEquals("", stringUtils.reverse("")));
+    }
+
 
     // TODO: 7 - Test that passing null input to methods throws IllegalArgumentException.
     //  Use assertThrows to verify that isPalindrome(null) throws IllegalArgumentException.
     //  Use assertThrows to verify that reverse(null) throws IllegalArgumentException.
     //  Use assertThrows to verify that countVowels(null) throws IllegalArgumentException.
+
+    @Test
+    void passingNullInputToMethodsThrowsIllegalArgumentException(){
+        assertThrows(IllegalArgumentException.class, () -> {stringUtils.isPalindrome(null);});
+        assertThrows(IllegalArgumentException.class, () -> {stringUtils.reverse(null);});
+        assertThrows(IllegalArgumentException.class, () -> {stringUtils.countVowels(null);});
+
+
+    }
 
 }

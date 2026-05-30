@@ -33,36 +33,74 @@ class PersonTest {
     // TODO: 1 - Use assertThat(name).isEqualTo() to test a Person's name.
     //  Use assertThat(alice.getName()).isEqualTo("Alice").
     //  Also assert bob's name is "Bob".
+    @Test
+    void testToCheckIfPersonsNameWrittenCorrectly(){
+        assertThat(alice.getName()).isEqualTo("Alice");
+        assertThat(bob.getName()).isEqualTo("Bob");
+    }
 
 
     // TODO: 2 - Use assertThat(age).isGreaterThan() to test age comparisons.
     //  Assert that charlie's age is greater than bob's age.
     //  Assert that bob's age is between 20 and 30 (use isBetween).
     //  Assert that alice's age is greaterThanOrEqualTo(30).
+    @Test
+    void ageComparisonTest(){
+        assertThat(charlie.getAge()).isGreaterThan(bob.getAge());
+        assertThat(bob.getAge()).isBetween(20,30);
+        assertThat(alice.getAge()).isGreaterThanOrEqualTo(30);
+    }
 
 
     // TODO: 3 - Use assertThat(email).contains("@") to test email format.
     //  Assert that alice's email contains "@".
     //  Assert that alice's email endsWith("example.com").
     //  Assert that alice's email startsWith("alice").
+    @Test
+    void testEmailFormat(){
+        assertThat(alice.getEmail()).contains("@");
+        assertThat(alice.getEmail()).endsWith("example.com");
+        assertThat(alice.getEmail()).startsWith("alice");
+    }
 
 
     // TODO: 4 - Use assertThat(list).hasSize().contains() to test the people list.
     //  Assert that the people list hasSize(3).
     //  Assert that the people list contains(alice, bob).
     //  Assert that the people list doesNotContain(new Person("Dave", 40, "dave@example.com")).
+    @Test
+    void testThePeopleListSizeAndWhatContainsAndWhatNot(){
+        assertThat(3).isEqualTo(people.size());
+        assertThat(people).contains(alice,bob);
+        assertThat(people).doesNotContain(new Person("Dave", 40, "dave@example.com"));
+
+    }
 
 
     // TODO: 5 - Use assertThat(list).filteredOn().hasSize() to filter and test.
     //  Filter the people list where age > 28 and assert the filtered list has size 2.
     //  Hint: assertThat(people).filteredOn(p -> p.getAge() > 28).hasSize(2);
     //  Also filter where email contains "example.com" and assert size is 2.
+    @Test
+    void filterAndTest(){
+//        assertThat(people).filteredOn(p -> p.getAge() > 28).hasSize(2);
+          assertThat(people).filteredOn(p -> p.getAge() > 28).hasSize(2);
+//        assertThat(people).filteredOn(p -> p.getEmail().contains("exaample.com")).hasSize(2);
+          assertThat(people).filteredOn(p -> p.getEmail().contains("example.com")).hasSize(2);
+
+    }
 
 
     // TODO: 6 - Use assertThat(list).extracting("name").contains() to extract fields.
     //  Extract names from the people list and assert it contains "Alice", "Bob", "Charlie".
     //  Hint: assertThat(people).extracting(Person::getName).contains("Alice", "Bob", "Charlie");
     //  Also extract ages and verify they contain 30, 25, 35.
+    @Test
+    void testIfListContainsWhatIsExpected(){
+        assertThat(people).extracting(Person::getName).contains("Alice", "Bob", "Charlie");
+        assertThat(people).extracting(Person::getAge).contains(30,25,35);
+    }
+
 
 
     // TODO: 7 - Use assertThat(string).startsWith().endsWith() for string assertions.
@@ -70,6 +108,12 @@ class PersonTest {
     //  Assert that "Hello World" containsIgnoringCase("hello").
     //  Assert that "Hello World" hasSize(11).
     //  Hint: Chain assertions like assertThat("Hello World").startsWith("Hello").endsWith("World");
+    @Test
+    void stringAssertionTest(){
+        assertThat("Hello World").startsWith("Hello").endsWith("World");
+        assertThat("Hello World").containsIgnoringCase("hello");
+        assertThat("Hello World").hasSize(11);
+    }
 
 
     // TODO: 8 - Test exception with assertThatThrownBy.
@@ -78,5 +122,17 @@ class PersonTest {
     //      .hasMessageContaining("null");
     //  Also test that negative age throws IllegalArgumentException.
     //  Also test that invalid email throws IllegalArgumentException.
+    @Test
+    void testExceptionWithAssertThatThrownBy(){
+        assertThatThrownBy(() -> new Person(null, 25, "test@test.com"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("null");
+        assertThatThrownBy(() -> new Person("Test", -25, "test@test.com"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("negative");
+        assertThatThrownBy(() -> new Person("Test", 25, "testtestcom"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Invalid");
+    }
 
 }
